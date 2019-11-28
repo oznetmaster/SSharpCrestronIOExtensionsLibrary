@@ -170,6 +170,30 @@ namespace Crestron.SimplSharp.CrestronIO
 			return Path.Combine (path1, path2);
 			}
 
+		public static string Combine (string path1, string path2, string path3)
+			{
+			return Path.Combine(Path.Combine (path1, path2), path3);
+			}
+
+		public static string Combine (string path1, string path2, string path3, string path4)
+			{
+			return Path.Combine (Path.Combine(Path.Combine (path1, path2), path3), path4);
+			}
+
+		public static string Combine (params string[] paths)
+			{
+			if (paths.Length == 0)
+				return String.Empty;
+			if (paths.Length == 1)
+				return paths[0];
+			var result = Path.Combine (paths[0], paths[1]);
+			if (paths.Length == 2)
+				return result;
+			for (int ix = 2; ix < paths.Length; ++ix)
+				result = Path.Combine (result, paths[ix]);
+			return result;
+			}
+
 		public static string GetDirectoryName (string path)
 			{
 			return Path.GetDirectoryName (path);
